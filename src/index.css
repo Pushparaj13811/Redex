@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-primary: 220 20 60; /* RGB values for crimson */
+    --color-brand-primary-hover: 161 13 47;
+    --color-brand-primary-light: 255 75 110;
+    --color-brand-background: 249 250 251;
+    --color-brand-surface: 255 255 255;
+    --color-brand-surface-hover: 243 244 246;
+    --color-brand-text: 31 41 55;
+    --color-brand-border: 229 231 235;
+    --color-brand-muted: 107 114 128;
+    --color-brand-success: 34 197 94;
+    --color-brand-warning: 245 158 11;
+    --color-brand-error: 239 68 68;
+    --color-brand-info: 59 130 246;
+    
+    /* Text color variants */
+    --color-brand-text-light: 255 255 255;
+  }
+
+  html {
+    font-family: sans-serif;
+    color: rgb(var(--color-brand-text));
+  }
+
+  body {
+    background-color: rgb(var(--color-brand-background));
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition-property: color, background-color, border-color;
+  }
+
+  .btn-primary {
+    background-color: rgb(var(--color-brand-primary));
+    color: rgb(var(--color-brand-text-light));
+  }
+  
+  .btn-primary:hover {
+    background-color: rgb(var(--color-brand-primary-hover));
+  }
+
+  .btn-secondary {
+    background-color: rgb(var(--color-brand-surface));
+    color: rgb(var(--color-brand-text));
+    border-width: 1px;
+    border-color: rgb(var(--color-brand-border));
+  }
+  
+  .btn-secondary:hover {
+    background-color: rgb(var(--color-brand-surface-hover));
+  }
+
+  .card {
+    background-color: rgb(var(--color-brand-surface));
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 1rem;
+  }
+}
