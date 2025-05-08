@@ -17,7 +17,7 @@
     --color-brand-warning: 245 158 11;
     --color-brand-error: 239 68 68;
     --color-brand-info: 59 130 246;
-    
+
     /* Text color variants */
     --color-brand-text-light: 255 255 255;
   }
@@ -30,6 +30,11 @@
   body {
     background-color: rgb(var(--color-brand-background));
     min-height: 100vh;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: var(--color-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1 {
@@ -45,6 +50,23 @@
   h3 {
     font-size: 1.125rem;
     font-weight: 700;
+  }
+
+  /* Skip link styles */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: rgb(var(--color-brand-primary));
+    color: rgb(var(--color-brand-text-light));
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.2s ease;
+  }
+  
+  .skip-to-content:focus {
+    top: 0;
+    outline: 2px solid rgb(var(--color-brand-primary-light));
   }
 }
 
@@ -63,7 +85,7 @@
     background-color: rgb(var(--color-brand-primary));
     color: rgb(var(--color-brand-text-light));
   }
-  
+
   .btn-primary:hover {
     background-color: rgb(var(--color-brand-primary-hover));
   }
@@ -74,7 +96,7 @@
     border-width: 1px;
     border-color: rgb(var(--color-brand-border));
   }
-  
+
   .btn-secondary:hover {
     background-color: rgb(var(--color-brand-surface-hover));
   }
