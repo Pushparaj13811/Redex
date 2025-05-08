@@ -6,6 +6,7 @@ export interface ProductProps {
   image: string;
   images?: string[]; // Array of additional product images
   category: string;
+  cat? : string;
   description?: string;
   inStock: boolean;
   deliveryTime: string;
