@@ -16,7 +16,7 @@ export interface CareerBenefit {
   id: string;
   title: string;
   description: string;
-  icon: React.ReactNode ;
+  icon: React.ComponentType;
 }
 
 export interface CareerTestimonial {

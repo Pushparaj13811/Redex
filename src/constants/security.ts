@@ -1,11 +1,10 @@
 import companyInformation from "./companyInfo"
 import { DataProtectionIcon, SecureTransactionsIcon, MultiFactorAuthenticationIcon, IncidentResponseIcon, PhysicalSecurityIcon, ApplicationSecurityIcon, PrivacyControlsIcon } from "./Icons"
+
 const securitySections = [
     {
         title: 'Data Protection',
-        icon: (
-            DataProtectionIcon
-        ),
+        icon: DataProtectionIcon,
         content: `At ${companyInformation.name}, we employ multiple layers of data protection to safeguard your personal information:
       
 • All personal data is encrypted both during transmission and at rest
@@ -17,9 +16,7 @@ We adhere to industry best practices and relevant regulations to ensure your dat
     },
     {
         title: 'Secure Transactions',
-        icon: (
-            SecureTransactionsIcon
-        ),
+        icon: SecureTransactionsIcon,
         content: `Your financial information security is our priority:
       
 • All payment transactions are processed through PCI-DSS compliant payment gateways
@@ -31,9 +28,7 @@ Our multiple layers of security ensure that your payment information remains con
     },
     {
         title: 'Account Security',
-        icon: (
-            MultiFactorAuthenticationIcon
-        ),
+        icon: MultiFactorAuthenticationIcon,
         content: `We provide several features to ensure the security of your account:
       
 • Multi-factor authentication for account access
@@ -46,9 +41,7 @@ We recommend that you use a strong, unique password and enable all available sec
     },
     {
         title: 'Privacy Controls',
-        icon: (
-            PrivacyControlsIcon
-        ),
+        icon: PrivacyControlsIcon,
         content: `We empower you with control over your personal information:
       
 • Granular privacy settings in your account dashboard
@@ -60,9 +53,7 @@ Visit your account settings to review and adjust your privacy preferences at any
     },
     {
         title: 'Application Security',
-        icon: (
-            ApplicationSecurityIcon
-        ),
+        icon: ApplicationSecurityIcon,
         content: `Our website and mobile applications are built with security at their core:
       
 • Regular code reviews and security testing throughout the development lifecycle
@@ -75,9 +66,7 @@ We employ a secure-by-design approach to ensure our applications remain resilien
     },
     {
         title: 'Physical Security',
-        icon: (
-            PhysicalSecurityIcon
-        ),
+        icon: PhysicalSecurityIcon,
         content: `We implement robust physical security measures for our infrastructure:
       
 • All data is hosted in Tier III or above certified data centers
@@ -90,9 +79,7 @@ These physical safeguards ensure that your data remains secure and available eve
     },
     {
         title: 'Incident Response',
-        icon: (
-            IncidentResponseIcon
-        ),
+        icon: IncidentResponseIcon,
         content: `We maintain a comprehensive incident response plan to address security events promptly:
       
 • Dedicated security team for monitoring and responding to incidents

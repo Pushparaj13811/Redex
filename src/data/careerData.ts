@@ -1,5 +1,6 @@
 import type { CareerOpening, CareerBenefit, CareerTestimonial, Department, CareerOffice } from '../types/careers';
 import { CompetitiveCompensationIcon, HealthAndWellnessIcon, LearningAndDevelopmentIcon, FlexibleWorkIcon, TeamEventsIcon, StartupEnvironmentIcon } from '../constants/Icons';
+
 export const jobOpenings: CareerOpening[] = [
     {
         id: 'job-001',
@@ -104,37 +105,37 @@ export const benefits: CareerBenefit[] = [
         id: 'benefit-001',
         title: 'Competitive Compensation',
         description: 'We offer industry-leading salaries, equity options, and performance bonuses to reward your contributions to our success.',
-        icon: CompetitiveCompensationIcon as unknown as React.ReactNode
+        icon: CompetitiveCompensationIcon
     },
     {
         id: 'benefit-002',
         title: 'Health & Wellness',
         description: 'Comprehensive health insurance, wellness programs, gym memberships, and mental health support for you and your family.',
-        icon: HealthAndWellnessIcon as unknown as React.ReactNode
+        icon: HealthAndWellnessIcon
     },
     {
         id: 'benefit-003',
         title: 'Learning & Development',
         description: 'Education stipends, professional development opportunities, and mentorship programs to help you grow your skills and career.',
-        icon: LearningAndDevelopmentIcon as unknown as React.ReactNode
+        icon: LearningAndDevelopmentIcon
     },
     {
         id: 'benefit-004',
         title: 'Flexible Work',
         description: 'Remote work options, flexible hours, and generous paid time off to help you maintain a healthy work-life balance.',
-        icon: FlexibleWorkIcon as unknown as React.ReactNode
+        icon: FlexibleWorkIcon
     },
     {
         id: 'benefit-005',
         title: 'Team Events',
         description: 'Regular team outings, retreats, and social events to build strong connections with your colleagues.',
-        icon: TeamEventsIcon as unknown as React.ReactNode
+        icon: TeamEventsIcon
     },
     {
         id: 'benefit-006',
         title: 'Startup Environment',
         description: 'Work in a fast-paced environment with plenty of opportunities to make an impact and shape the future of quick commerce.',
-        icon: StartupEnvironmentIcon as unknown as React.ReactNode
+        icon: StartupEnvironmentIcon
     }
 ];
 
