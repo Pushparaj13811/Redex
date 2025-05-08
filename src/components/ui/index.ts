@@ -6,9 +6,7 @@ export { default as Card } from './Card';
 export type { CardProps } from './Card';
 
 export { default as Input } from './Input';
-
-export { default as Flex } from './Flex';
-export type { FlexProps } from './Flex';
+export type { TextInputProps } from '../../types/input';
 
 // Form components
 export {
@@ -19,16 +17,14 @@ export {
   useFormControl,
 } from './Form';
 
-export type {
-  FormControlProps,
-  FormLabelProps,
-  FormHelperTextProps,
-  FormErrorMessageProps,
-} from './Form';
+// Layout components
+export { default as Flex } from './Flex';
+export type { FlexProps } from './Flex';
 
-export { default as Modal } from './Modal';
+export { default as PageHeader } from './PageHeader';
+export type { PageHeaderProps } from './PageHeader';
 
 // Product UI components
 export { default as ProductCard } from './ProductCard';
-export { default as CategoryCard } from './CategoryCard';
-export { default as CartItem } from './CartItem'; 
+export { default as CartItem } from './CartItem';
+export { default as CategoryCard } from './CategoryCard'; 
