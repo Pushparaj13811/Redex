@@ -150,11 +150,9 @@ const SEOHead: React.FC<SEOProps> = ({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       
-      {/* Favicons - Complete set to ensure consistency across all routes */}
-      <link rel="icon" href="/favicon.ico" sizes="any" />
-      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-      <link rel="manifest" href="/manifest.json" />
+      {/* Favicon - Fixed to use only existing files */}
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       
       {/* Structured Data */}
       <script type="application/ld+json">
