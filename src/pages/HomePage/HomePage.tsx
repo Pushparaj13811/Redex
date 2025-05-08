@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useProducts } from '../hooks/useProducts';
-import type { ProductProps } from '../types/product';
-import CategoryCard from '../components/ui/CategoryCard';
-import ProductCard from '../components/ui/ProductCard';
-import { useCategories } from '../hooks/useCategories';
+import { useProducts } from '../../hooks/useProducts';
+import type { ProductProps } from '../../types/product';
+import CategoryCard from '../../components/ui/CategoryCard';
+import ProductCard from '../../components/ui/ProductCard';
+import { useCategories } from '../../hooks/useCategories';
 
 const HomePage: React.FC = () => {
   const { getFeaturedProducts } = useProducts();
