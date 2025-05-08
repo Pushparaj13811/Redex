@@ -1,60 +1,58 @@
 import type { Variants, Transition } from "framer-motion";
 
-// Centralized animation configuration
+// Centralized animation configuration - more subtle
 export const transitionConfig: Transition = {
   type: "tween",
   ease: [0.25, 0.1, 0.25, 1], // cubic-bezier easing for premium feel
-  duration: 0.5,
+  duration: 0.4, // slightly faster for subtlety
 };
 
-// Page transition variants
+// Page transition variants - more subtle
 export const pageVariants: Variants = {
   initial: {
     opacity: 0,
-    y: 15,
+    y: 8, // reduced from 15 for subtlety
   },
   animate: {
     opacity: 1,
     y: 0,
     transition: {
       ...transitionConfig,
-      staggerChildren: 0.1,
+      staggerChildren: 0.05, // reduced for subtlety
     },
   },
   exit: {
     opacity: 0,
-    y: -10,
+    y: -5, // reduced from -10 for subtlety
     transition: {
       ...transitionConfig,
-      duration: 0.3,
+      duration: 0.2, // reduced for subtlety
     },
   },
 };
 
-// Section reveal variants (for scrolling animations)
+// Section reveal variants - more subtle
 export const sectionVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 30,
+    y: 15, // reduced from 30 for subtlety
   },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      ...transitionConfig,
-    },
+    transition: transitionConfig,
   },
 };
 
-// Staggered children variants
+// Staggered children variants - more subtle
 export const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 }, // reduced from 20 for subtlety
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       ...transitionConfig,
-      duration: 0.4,
+      duration: 0.3, // reduced for subtlety
     },
   },
 };

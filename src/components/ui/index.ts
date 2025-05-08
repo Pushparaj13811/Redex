@@ -33,5 +33,18 @@ export { default as CategoryCard } from './CategoryCard';
 export { default as PageTransition } from './PageTransition';
 export { default as PageTransitionWrapper } from './PageTransitionWrapper';
 export { default as SectionReveal } from './SectionReveal';
-export { default as StaggeredItems, Item } from './StaggeredItems';
-export { default as SmoothScrollLink } from './SmoothScrollLink'; 
+export { default as StaggeredItems } from './StaggeredItems';
+export { default as Item } from './StaggeredItems/Item';
+export { default as SmoothScrollLink } from './SmoothScrollLink';
+
+// Skeleton components
+export { 
+  Skeleton,
+  CardSkeleton,
+  TableSkeleton,
+  TextSkeleton,
+  ProductCardSkeleton,
+  PageHeaderSkeleton,
+  GridSkeleton
+} from './Skeleton';
+export { default as PageSkeleton } from './PageSkeleton'; 

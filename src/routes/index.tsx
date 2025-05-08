@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { createBrowserRouter, RouterProvider as ReactRouterProvider, Outlet, Navigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import { PageTransitionWrapper } from '../components/ui';
+import { PageTransitionWrapper, PageSkeleton } from '../components/ui';
 
 // Layouts
 const MainLayout = lazy(() => import('../components/layouts/MainLayout'));
@@ -47,10 +47,41 @@ const PlaceholderPage = () => (
 // Use placeholder for pages that aren't created yet
 const DashboardPage = lazy(() => Promise.resolve({ default: PlaceholderPage }));
 
-// Loading Fallback
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-primary"></div>
+// Component-specific loading skeletons
+const MainLayoutSkeleton = () => (
+  <div className="flex flex-col min-h-screen">
+    {/* Navbar skeleton */}
+    <div className="h-16 bg-white dark:bg-gray-800 shadow-sm fixed top-0 left-0 right-0 z-10">
+      <div className="container mx-auto px-4 h-full flex items-center justify-between">
+        <div className="w-32 h-8 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+        <div className="flex space-x-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="w-20 h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    {/* Main content area */}
+    <main className="flex-grow pt-20">
+      <Outlet />
+    </main>
+    
+    {/* Footer skeleton */}
+    <div className="bg-gray-100 dark:bg-gray-900 py-8">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="space-y-3">
+              <div className="w-24 h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+              {[1, 2, 3].map((j) => (
+                <div key={j} className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   </div>
 );
 
@@ -59,7 +90,7 @@ const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
-    return <LoadingFallback />;
+    return <PageSkeleton />;
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
@@ -69,7 +100,7 @@ const AdminRoute = () => {
   const { isAuthenticated, isAdmin, isLoading } = useAuth();
 
   if (isLoading) {
-    return <LoadingFallback />;
+    return <PageSkeleton />;
   }
 
   if (!isAuthenticated) {
@@ -94,7 +125,7 @@ const createRouter = () => {
     {
       path: '/',
       element: (
-        <Suspense fallback={<LoadingFallback />}>
+        <Suspense fallback={<MainLayoutSkeleton />}>
           <MainLayout />
         </Suspense>
       ),
@@ -102,7 +133,7 @@ const createRouter = () => {
         {
           index: true,
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(HomePage)()}
             </Suspense>
           ),
@@ -110,7 +141,7 @@ const createRouter = () => {
         {
           path: 'shop',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="product" />}>
               {withPageTransition(ShopPage)()}
             </Suspense>
           ),
@@ -118,7 +149,7 @@ const createRouter = () => {
         {
           path: 'cart',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="list" />}>
               {withPageTransition(CartPage)()}
             </Suspense>
           ),
@@ -126,7 +157,7 @@ const createRouter = () => {
         {
           path: 'product/:id',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="detail" />}>
               {withPageTransition(ProductDetailPage)()}
             </Suspense>
           ),
@@ -134,7 +165,7 @@ const createRouter = () => {
         {
           path: 'contact',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(ContactPage)()}
             </Suspense>
           ),
@@ -142,7 +173,7 @@ const createRouter = () => {
         {
           path: 'partner',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(PartnerPage)()}
             </Suspense>
           ),
@@ -150,7 +181,7 @@ const createRouter = () => {
         {
           path: 'seller',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(SellerPage)()}
             </Suspense>
           ),
@@ -158,7 +189,7 @@ const createRouter = () => {
         {
           path: 'warehouses',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(WarehousePage)()}
             </Suspense>
           ),
@@ -166,7 +197,7 @@ const createRouter = () => {
         {
           path: 'delivery',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(DeliveryPage)()}
             </Suspense>
           ),
@@ -174,7 +205,7 @@ const createRouter = () => {
         {
           path: 'about',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(AboutPage)()}
             </Suspense>
           ),
@@ -182,7 +213,7 @@ const createRouter = () => {
         {
           path: 'blog',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="list" />}>
               {withPageTransition(BlogPage)()}
             </Suspense>
           ),
@@ -190,7 +221,7 @@ const createRouter = () => {
         {
           path: 'lead',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(LeadPage)()}
             </Suspense>
           ),
@@ -198,7 +229,7 @@ const createRouter = () => {
         {
           path: 'privacy',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(PrivacyPage)()}
             </Suspense>
           ),
@@ -206,7 +237,7 @@ const createRouter = () => {
         {
           path: 'terms',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(TermsPage)()}
             </Suspense>
           ),
@@ -214,7 +245,7 @@ const createRouter = () => {
         {
           path: 'faqs',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(FAQsPage)()}
             </Suspense>
           ),
@@ -222,7 +253,7 @@ const createRouter = () => {
         {
           path: 'security',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(SecurityPage)()}
             </Suspense>
           ),
@@ -230,7 +261,7 @@ const createRouter = () => {
         {
           path: 'mobile',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(MobilePage)()}
             </Suspense>
           ),
@@ -238,7 +269,7 @@ const createRouter = () => {
         {
           path: 'values',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(ValuesPage)()}
             </Suspense>
           ),
@@ -246,7 +277,7 @@ const createRouter = () => {
         {
           path: 'resources',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="list" />}>
               {withPageTransition(ResourcesPage)()}
             </Suspense>
           ),
@@ -254,7 +285,7 @@ const createRouter = () => {
         {
           path: 'careers',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(CareerPage)()}
             </Suspense>
           ),
@@ -262,15 +293,15 @@ const createRouter = () => {
         {
           path: 'press',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="list" />}>
               {withPageTransition(PressPage)()}
             </Suspense>
           ),
         },
         {
-          path: 'category',
+          path: 'category/:id',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="list" />}>
               {withPageTransition(CategoryPage)()}
             </Suspense>
           ),
@@ -278,8 +309,16 @@ const createRouter = () => {
         {
           path: 'examples',
           element: (
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<PageSkeleton type="default" />}>
               {withPageTransition(ExampleAnimatedPage)()}
+            </Suspense>
+          ),
+        },
+        {
+          path: '*',
+          element: (
+            <Suspense fallback={<PageSkeleton type="default" />}>
+              {withPageTransition(NotFoundPage)()}
             </Suspense>
           ),
         },
@@ -290,7 +329,7 @@ const createRouter = () => {
             {
               path: 'dashboard',
               element: (
-                <Suspense fallback={<LoadingFallback />}>
+                <Suspense fallback={<PageSkeleton type="default" />}>
                   {withPageTransition(DashboardPage)()}
                 </Suspense>
               ),
@@ -304,31 +343,21 @@ const createRouter = () => {
             {
               path: 'admin',
               element: (
-                <Suspense fallback={<LoadingFallback />}>
+                <Suspense fallback={<PageSkeleton type="default" />}>
                   {withPageTransition(PlaceholderPage)()}
                 </Suspense>
               ),
             },
           ],
         },
-        // 404 Not Found route
-        {
-          path: '*',
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              {withPageTransition(NotFoundPage)()}
-            </Suspense>
-          ),
-        },
       ],
     },
   ]);
 };
 
-// Router Provider
+// RouterProvider component
 const RouterProvider = () => {
   const router = createRouter();
-
   return <ReactRouterProvider router={router} />;
 };
 
