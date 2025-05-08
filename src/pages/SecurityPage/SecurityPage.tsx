@@ -34,7 +34,7 @@ const SecurityPage: React.FC = () => {
               <div key={index} className="border rounded-lg p-6" style={{ borderColor: theme.colors.brand.border }}>
                 <div className="flex items-start mb-4">
                   <div className="mr-4" style={{ color: theme.colors.brand.primary }}>
-                    {section.icon as unknown as React.ReactNode}
+                    {React.createElement(section.icon)}
                   </div>
                   <h2 className="text-xl font-semibold" style={{ color: theme.colors.brand.primary }}>
                     {section.title}

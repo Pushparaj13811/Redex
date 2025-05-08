@@ -24,8 +24,8 @@ const Footer = () => {
                     {/* Column 1: About and App Download */}
                     <div>
                         <div className="flex items-center mb-4">
-                            <div className="w-32 h-24 rounded-full bg-brand-textLight flex items-center justify-center">
-                                <img src={companyInformation.logo} alt={companyInformation.name} className="w-full h-full object-contain" />
+                            <div className="w-40 rounded-full bg-brand-textLight flex items-center justify-center">
+                                <img src={companyInformation.logo2} alt={companyInformation.name} className="w-full h-full object-contain" />
                             </div>
                         </div>
 

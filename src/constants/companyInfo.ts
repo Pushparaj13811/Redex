@@ -6,7 +6,7 @@ const companyInformation = {
     foundedYear: 2025,
     countries: ["Nepal"],
     logo: "/assets/Logo.svg",
-    logo2: "/assets/logo2.png",
+    logo2: "/logo512.png",
     description: "Redex is Nepal's leading quick commerce platform, delivering groceries, fresh produce, household essentials, and more to your doorstep in under 30 minutes.",
     socialMedia: {
         facebook: "https://www.facebook.com/redex.nepal",
