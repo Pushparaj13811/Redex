@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { sectionVariants } from '../../utils/motion';
+import type { Variants } from 'framer-motion';
+import { sectionVariants, transitionConfig } from '../../utils/motion';
 
 interface SectionRevealProps {
   children: React.ReactNode;
@@ -29,12 +30,13 @@ const SectionReveal: React.FC<SectionRevealProps> = ({
     amount: threshold,
   });
   
-  const customVariants = {
-    ...sectionVariants,
-    visible: {
+  // Create custom variant with delay
+  const customVariants: Variants = {
+    hidden: { ...sectionVariants.hidden },
+    visible: { 
       ...sectionVariants.visible,
       transition: {
-        ...sectionVariants.visible.transition,
+        ...transitionConfig,
         delay,
       }
     }
