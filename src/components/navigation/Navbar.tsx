@@ -94,7 +94,7 @@ const Navbar = () => {
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-brand-textLight flex items-center justify-center">
-                  <span className="text-brand-primary font-bold text-xl">{companyInformation.name.charAt(0)}</span>
+                  <img src={companyInformation.logo} alt={companyInformation.name} className="w-full pr-1 h-full object-contain" />
                 </div>
                 <span className="ml-2 text-brand-textLight font-semibold text-lg hidden sm:block">
                   {companyInformation.name}

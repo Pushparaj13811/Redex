@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider as ReactRouterProvider, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import routes from './config';
+
 import { RoutePermission } from '../types/routes';
 import type { RouteItem, LocationState } from '../types/routes';
 import useAuth from '../hooks/useAuth';

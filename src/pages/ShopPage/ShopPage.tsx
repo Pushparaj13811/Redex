@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CategoryCard from '../components/ui/CategoryCard';
-import ProductCard from '../components/ui/ProductCard';
-import companyInformation from '../constants/companyInfo';
-import { useProducts } from '../hooks/useProducts';
-import { useCategories } from '../hooks/useCategories';
+import CategoryCard from '../../components/ui/CategoryCard';
+import ProductCard from '../../components/ui/ProductCard';
+import companyInformation from '../../constants/companyInfo';
+import { useProducts } from '../../hooks/useProducts';
+import { useCategories } from '../../hooks/useCategories';
 
 const ShopPage: React.FC = () => {
   const { categories } = useCategories();
