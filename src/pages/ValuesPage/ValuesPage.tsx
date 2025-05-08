@@ -148,7 +148,7 @@ const ValuesPage: React.FC = () => {
             <blockquote className="text-xl italic mb-4" style={{ color: theme.colors.brand.text }}>
               "Our values aren't just words on a wall—they're how we make decisions, how we build our team, and how we measure our success."
             </blockquote>
-            <p className="font-semibold" style={{ color: theme.colors.brand.primary }}>Aaditya Paudel, CEO & Founder</p>
+            <p className="font-semibold" style={{ color: theme.colors.brand.primary }}>Ayush Jaiswal - Founder & CEO</p>
           </Card>
         </div>
       </div>

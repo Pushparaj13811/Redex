@@ -71,7 +71,7 @@ const CareerPage: React.FC = () => {
           {benefits.map((benefit, index) => (
             <Card key={index} className="p-6 flex flex-col items-center text-center">
               <div className="rounded-full p-4 mb-4" style={{ color: theme.colors.brand.primary, backgroundColor: `${theme.colors.brand.primaryLight}30` }}>
-                {benefit.icon}
+                {React.createElement(benefit.icon)}
               </div>
               <h3 className="text-lg font-semibold mb-3" style={{ color: theme.colors.brand.text }}>
                 {benefit.title}
