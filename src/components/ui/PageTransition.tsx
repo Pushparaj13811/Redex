@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { pageVariants, scrollToTop } from '../../utils/motion';
 
 interface PageTransitionProps {
   children: React.ReactNode;
@@ -6,35 +8,39 @@ interface PageTransitionProps {
 }
 
 /**
- * PageTransition component provides subtle animations for page changes
+ * PageTransition component provides premium animations for page changes
+ * using Framer Motion
  */
 const PageTransition: React.FC<PageTransitionProps> = ({ 
   children, 
   location 
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
+  // Scroll to top when location changes
   useEffect(() => {
-    // Reset animation on route change
-    setIsVisible(false);
-    
-    // Start entrance animation after a short delay
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 50);
-    
-    return () => clearTimeout(timer);
+    if (location) {
+      // Check if there's a hash in the location
+      if (location.includes('#')) {
+        // Do nothing, the hash scroll will be handled separately
+        return;
+      }
+      
+      // Only scroll to top if there's no hash
+      scrollToTop();
+    }
   }, [location]);
 
   return (
-    <div
-      className={`
-        transition-all duration-300 ease-in-out
-        transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
-      `}
-    >
-      {children}
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageVariants}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

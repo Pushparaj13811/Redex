@@ -32,6 +32,7 @@ const ResourcesPage = lazy(() => import('../pages/ResourcesPage'));
 const CareerPage = lazy(() => import('../pages/CareerPage'));
 const PressPage = lazy(() => import('../pages/PressPage'));
 const CategoryPage = lazy(() => import('../pages/CategoryPage'));
+const ExampleAnimatedPage = lazy(() => import('../pages/ExampleAnimatedPage'));
 
 // Default placeholders for pages not yet created
 const PlaceholderPage = () => (
@@ -271,6 +272,14 @@ const createRouter = () => {
           element: (
             <Suspense fallback={<LoadingFallback />}>
               {withPageTransition(CategoryPage)()}
+            </Suspense>
+          ),
+        },
+        {
+          path: 'examples',
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              {withPageTransition(ExampleAnimatedPage)()}
             </Suspense>
           ),
         },

@@ -29,5 +29,9 @@ export { default as ProductCard } from './ProductCard';
 export { default as CartItem } from './CartItem';
 export { default as CategoryCard } from './CategoryCard';
 
+// Animation and transition components
 export { default as PageTransition } from './PageTransition';
-export { default as PageTransitionWrapper } from './PageTransitionWrapper'; 
+export { default as PageTransitionWrapper } from './PageTransitionWrapper';
+export { default as SectionReveal } from './SectionReveal';
+export { default as StaggeredItems, Item } from './StaggeredItems';
+export { default as SmoothScrollLink } from './SmoothScrollLink'; 
