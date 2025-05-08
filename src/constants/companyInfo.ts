@@ -3,7 +3,10 @@ const companyInformation = {
     address: "Redex Pvt. Ltd., 3rd Floor, Naxal Plaza, Kathmandu, Nepal",
     phone: "+977-9804301484",
     email: "support@redex.com.np",
-    logo: "https://www.redex.com.np/assets/logo.png",
+    foundedYear: 2025,
+    countries: ["Nepal"],
+    logo: "/assets/Logo.svg",
+    logo2: "/assets/logo2.png",
     description: "Redex is Nepal's leading quick commerce platform, delivering groceries, fresh produce, household essentials, and more to your doorstep in under 30 minutes.",
     socialMedia: {
         facebook: "https://www.facebook.com/redex.nepal",
@@ -26,12 +29,12 @@ const companyInformation = {
     appDownload: {
         ios: {
             url: "https://apps.apple.com/app/redex-grocery-delivery/id1234567890",
-            image: "/assets/app-store-badge.png",
+            image: "/assets/applogo.svg",
             alt: "Download on the App Store"
         },
         android: {
             url: "https://play.google.com/store/apps/details?id=com.redex.app",
-            image: "/assets/google-play-badge.png",
+            image: "/assets/applogo.svg",
             alt: "Get it on Google Play"
         }
     },
@@ -41,10 +44,10 @@ const companyInformation = {
         { label: "Blog", url: "/blog" },
         { label: "Press", url: "/press" },
         { label: "Lead", url: "/lead" },
-        { label: "Value", url: "/value" }
+        { label: "Values", url: "/values" }
     ],
     legalLinks: [
-        { label: "Privacy", url: "/privacy-policy" },
+        { label: "Privacy", url: "/privacy" },
         { label: "Terms", url: "/terms" },
         { label: "FAQs", url: "/faqs" },
         { label: "Security", url: "/security" },
@@ -55,8 +58,8 @@ const companyInformation = {
         { label: "Partner", url: "/partner" },
         { label: "Franchise", url: "/franchise" },
         { label: "Seller", url: "/seller" },
-        { label: "Warehouse", url: "/warehouse" },
-        { label: "Deliver", url: "/deliver" },
+        { label: "Warehouses", url: "/warehouses" },
+        { label: "Delivery", url: "/delivery" },
         { label: "Resources", url: "/resources" }
     ],
     productCategories: [
@@ -91,16 +94,16 @@ const companyInformation = {
         { label: "Toys & Games", url: "/category/toys-games" }
     ],
     returnPolicy: "We accept returns within 2 days for perishable items and 7 days for non-perishable items. Please visit our Return Policy page for more details.",
-    privacyPolicy: "https://www.redex.com.np/privacy-policy",
-    termsOfService: "https://www.redex.com.np/terms-of-service",
-    aboutUs: "https://www.redex.com.np/about-us",
-    contactUs: "https://www.redex.com.np/contact-us",
-    faq: "https://www.redex.com.np/faq",
-    blog: "https://www.redex.com.np/blog",
-    careers: "https://www.redex.com.np/careers",
-    support: "https://www.redex.com.np/support",
-    cookiesPolicy: "https://www.redex.com.np/cookies-policy",
-    sitemap: "https://www.redex.com.np/sitemap",
+    privacyPolicy: "/privacy",
+    termsOfService: "/terms",
+    aboutUs: "/about",
+    contactUs: "/contact",
+    faq: "/faqs",
+    blog: "/blog",
+    careers: "/careers",
+    support: "/support",
+    cookiesPolicy: "/cookies-policy",
+    sitemap: "/sitemap",
     copyright: "© 2025 Redex Pvt. Ltd. All rights reserved.",
     disclaimer: "Redex is owned & managed by Redex Commerce Private Limited and is not related, linked or interconnected in whatsoever manner or nature, to GROFFRR.COM which is a real estate services business operated by Redstone Consultancy Services Private Limited.",
     companyInfo: "© Blink Commerce Private Limited, 2016-2025"
