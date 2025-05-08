@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { createBrowserRouter, RouterProvider as ReactRouterProvider, Outlet, Navigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import { PageTransitionWrapper } from '../components/ui';
 
 // Layouts
 const MainLayout = lazy(() => import('../components/layouts/MainLayout'));
@@ -34,10 +35,12 @@ const CategoryPage = lazy(() => import('../pages/CategoryPage'));
 
 // Default placeholders for pages not yet created
 const PlaceholderPage = () => (
-  <div className="container mx-auto px-4 py-8">
-    <h1 className="text-2xl font-semibold text-brand-text mb-4">Page Coming Soon</h1>
-    <p className="text-brand-text">This page is under construction.</p>
-  </div>
+  <PageTransitionWrapper>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-semibold text-brand-text mb-4">Page Coming Soon</h1>
+      <p className="text-brand-text">This page is under construction.</p>
+    </div>
+  </PageTransitionWrapper>
 );
 
 // Use placeholder for pages that aren't created yet
@@ -75,6 +78,15 @@ const AdminRoute = () => {
   return isAdmin ? <Outlet /> : <Navigate to="/dashboard" replace />;
 };
 
+// Wrap page components with PageTransitionWrapper
+const withPageTransition = (Component: React.ComponentType) => {
+  return () => (
+    <PageTransitionWrapper>
+      <Component />
+    </PageTransitionWrapper>
+  );
+};
+
 // Create router with routes
 const createRouter = () => {
   return createBrowserRouter([
@@ -90,7 +102,7 @@ const createRouter = () => {
           index: true,
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <HomePage />
+              {withPageTransition(HomePage)()}
             </Suspense>
           ),
         },
@@ -98,7 +110,7 @@ const createRouter = () => {
           path: 'shop',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <ShopPage />
+              {withPageTransition(ShopPage)()}
             </Suspense>
           ),
         },
@@ -106,7 +118,7 @@ const createRouter = () => {
           path: 'cart',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <CartPage />
+              {withPageTransition(CartPage)()}
             </Suspense>
           ),
         },
@@ -114,7 +126,7 @@ const createRouter = () => {
           path: 'product/:id',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <ProductDetailPage />
+              {withPageTransition(ProductDetailPage)()}
             </Suspense>
           ),
         },
@@ -122,7 +134,7 @@ const createRouter = () => {
           path: 'contact',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <ContactPage />
+              {withPageTransition(ContactPage)()}
             </Suspense>
           ),
         },
@@ -130,7 +142,7 @@ const createRouter = () => {
           path: 'partner',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <PartnerPage />
+              {withPageTransition(PartnerPage)()}
             </Suspense>
           ),
         },
@@ -138,7 +150,7 @@ const createRouter = () => {
           path: 'seller',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <SellerPage />
+              {withPageTransition(SellerPage)()}
             </Suspense>
           ),
         },
@@ -146,7 +158,7 @@ const createRouter = () => {
           path: 'warehouses',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <WarehousePage />
+              {withPageTransition(WarehousePage)()}
             </Suspense>
           ),
         },
@@ -154,7 +166,7 @@ const createRouter = () => {
           path: 'delivery',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <DeliveryPage />
+              {withPageTransition(DeliveryPage)()}
             </Suspense>
           ),
         },
@@ -162,7 +174,7 @@ const createRouter = () => {
           path: 'about',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <AboutPage />
+              {withPageTransition(AboutPage)()}
             </Suspense>
           ),
         },
@@ -170,7 +182,7 @@ const createRouter = () => {
           path: 'blog',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <BlogPage />
+              {withPageTransition(BlogPage)()}
             </Suspense>
           ),
         },
@@ -178,7 +190,7 @@ const createRouter = () => {
           path: 'lead',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <LeadPage />
+              {withPageTransition(LeadPage)()}
             </Suspense>
           ),
         },
@@ -186,7 +198,7 @@ const createRouter = () => {
           path: 'privacy',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <PrivacyPage />
+              {withPageTransition(PrivacyPage)()}
             </Suspense>
           ),
         },
@@ -194,7 +206,7 @@ const createRouter = () => {
           path: 'terms',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <TermsPage />
+              {withPageTransition(TermsPage)()}
             </Suspense>
           ),
         },
@@ -202,7 +214,7 @@ const createRouter = () => {
           path: 'faqs',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <FAQsPage />
+              {withPageTransition(FAQsPage)()}
             </Suspense>
           ),
         },
@@ -210,7 +222,7 @@ const createRouter = () => {
           path: 'security',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <SecurityPage />
+              {withPageTransition(SecurityPage)()}
             </Suspense>
           ),
         },
@@ -218,7 +230,7 @@ const createRouter = () => {
           path: 'mobile',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <MobilePage />
+              {withPageTransition(MobilePage)()}
             </Suspense>
           ),
         },
@@ -226,7 +238,7 @@ const createRouter = () => {
           path: 'values',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <ValuesPage />
+              {withPageTransition(ValuesPage)()}
             </Suspense>
           ),
         },
@@ -234,7 +246,7 @@ const createRouter = () => {
           path: 'resources',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <ResourcesPage />
+              {withPageTransition(ResourcesPage)()}
             </Suspense>
           ),
         },
@@ -242,7 +254,7 @@ const createRouter = () => {
           path: 'careers',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <CareerPage />
+              {withPageTransition(CareerPage)()}
             </Suspense>
           ),
         },
@@ -250,7 +262,7 @@ const createRouter = () => {
           path: 'press',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <PressPage />
+              {withPageTransition(PressPage)()}
             </Suspense>
           ),
         },
@@ -258,7 +270,7 @@ const createRouter = () => {
           path: 'category',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <CategoryPage />
+              {withPageTransition(CategoryPage)()}
             </Suspense>
           ),
         },
@@ -270,7 +282,7 @@ const createRouter = () => {
               path: 'dashboard',
               element: (
                 <Suspense fallback={<LoadingFallback />}>
-                  <DashboardPage />
+                  {withPageTransition(DashboardPage)()}
                 </Suspense>
               ),
             },
@@ -284,7 +296,7 @@ const createRouter = () => {
               path: 'admin',
               element: (
                 <Suspense fallback={<LoadingFallback />}>
-                  <PlaceholderPage />
+                  {withPageTransition(PlaceholderPage)()}
                 </Suspense>
               ),
             },
@@ -295,7 +307,7 @@ const createRouter = () => {
           path: '*',
           element: (
             <Suspense fallback={<LoadingFallback />}>
-              <NotFoundPage />
+              {withPageTransition(NotFoundPage)()}
             </Suspense>
           ),
         },

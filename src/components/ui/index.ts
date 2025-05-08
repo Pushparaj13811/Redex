@@ -27,4 +27,7 @@ export type { PageHeaderProps } from './PageHeader';
 // Product UI components
 export { default as ProductCard } from './ProductCard';
 export { default as CartItem } from './CartItem';
-export { default as CategoryCard } from './CategoryCard'; 
+export { default as CategoryCard } from './CategoryCard';
+
+export { default as PageTransition } from './PageTransition';
+export { default as PageTransitionWrapper } from './PageTransitionWrapper'; 
