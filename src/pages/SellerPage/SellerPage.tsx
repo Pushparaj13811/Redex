@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PageHeader, Card, Button, Input, FormControl, FormLabel, FormErrorMessage } from '../../components/ui';
 import companyInformation from '../../constants/companyInfo';
 import theme from '../../config/theme';
+import SEOHead from '../../components/seo/SEOHead';
 
 interface FormData {
   companyName: string;
@@ -188,241 +189,249 @@ const SellerPage: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <PageHeader 
-        title="Our Product Sourcing Approach" 
-        subtitle="How we curate quality products for 10-minute delivery"
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Product Sourcing', href: '/seller' }
-        ]}
-        metaTitle={`${companyInformation.name} - Product Sourcing & Curation`}
-        metaDescription="Learn about Redex's direct inventory model and how we carefully source, curate, and quality-check every product to deliver the best to your doorstep."
+    <>
+      <SEOHead 
+        title="Product Sourcing"
+        description="Learn about Redex's direct inventory model for 10-minute grocery delivery and how we curate quality products for our customers."
+        keywords="grocery sourcing, direct inventory model, product selection, quality groceries"
       />
       
-      {/* Business Model Explanation */}
-      <div className="mb-12">
-        <Card className="p-8">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: theme.colors.brand.primary }}>
-            Our Direct Inventory Model
+      <div className="container mx-auto px-4 py-8">
+        <PageHeader 
+          title="Our Product Sourcing Approach" 
+          subtitle="How we curate quality products for 10-minute delivery"
+          breadcrumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Product Sourcing', href: '/seller' }
+          ]}
+          metaTitle={`${companyInformation.name} - Product Sourcing & Curation`}
+          metaDescription="Learn about Redex's direct inventory model and how we carefully source, curate, and quality-check every product to deliver the best to your doorstep."
+        />
+        
+        {/* Business Model Explanation */}
+        <div className="mb-12">
+          <Card className="p-8">
+            <h2 className="text-2xl font-bold mb-4" style={{ color: theme.colors.brand.primary }}>
+              Our Direct Inventory Model
+            </h2>
+            <p className="text-brand-text mb-4">
+              Unlike traditional marketplaces, Redex operates on a direct inventory model. We source, purchase, and own all products available 
+              on our platform, which we carefully store in our network of dark stores for lightning-fast delivery.
+            </p>
+            <p className="text-brand-text mb-4 font-medium">
+              We do not operate as a marketplace where individual sellers can register and list their products. 
+              This approach allows us complete control over product quality, availability, and the 10-minute delivery promise we make to our customers.
+            </p>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+              {statistics.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-3xl font-bold mb-1" style={{ color: theme.colors.brand.primary }}>{stat.value}</div>
+                  <div className="text-sm text-brand-muted">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+        
+        {/* Quality Process */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: theme.colors.brand.primary }}>
+            Our Quality-First Approach
           </h2>
-          <p className="text-brand-text mb-4">
-            Unlike traditional marketplaces, Redex operates on a direct inventory model. We source, purchase, and own all products available 
-            on our platform, which we carefully store in our network of dark stores for lightning-fast delivery.
-          </p>
-          <p className="text-brand-text mb-4 font-medium">
-            We do not operate as a marketplace where individual sellers can register and list their products. 
-            This approach allows us complete control over product quality, availability, and the 10-minute delivery promise we make to our customers.
-          </p>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {statistics.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold mb-1" style={{ color: theme.colors.brand.primary }}>{stat.value}</div>
-                <div className="text-sm text-brand-muted">{stat.label}</div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {qualityProcessSteps.map((step, index) => (
+              <Card key={index} className="p-6 flex flex-col items-center text-center">
+                <div className="rounded-full p-4 mb-4" style={{ color: theme.colors.brand.primary, backgroundColor: `${theme.colors.brand.primaryLight}20` }}>
+                  {step.icon}
+                </div>
+                <h3 className="text-lg font-semibold mb-3" style={{ color: theme.colors.brand.text }}>
+                  {step.title}
+                </h3>
+                <p className="text-brand-muted">{step.description}</p>
+              </Card>
             ))}
           </div>
-        </Card>
-      </div>
-      
-      {/* Quality Process */}
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: theme.colors.brand.primary }}>
-          Our Quality-First Approach
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {qualityProcessSteps.map((step, index) => (
-            <Card key={index} className="p-6 flex flex-col items-center text-center">
-              <div className="rounded-full p-4 mb-4" style={{ color: theme.colors.brand.primary, backgroundColor: `${theme.colors.brand.primaryLight}20` }}>
-                {step.icon}
-              </div>
-              <h3 className="text-lg font-semibold mb-3" style={{ color: theme.colors.brand.text }}>
-                {step.title}
-              </h3>
-              <p className="text-brand-muted">{step.description}</p>
-            </Card>
-          ))}
         </div>
-      </div>
-      
-      {/* Supplier Requirements */}
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: theme.colors.brand.primary }}>
-          Our Supplier Selection Criteria
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {supplierRequirements.map((requirement, index) => (
-            <Card key={index} className="p-6">
-              <h3 className="text-lg font-semibold mb-3" style={{ color: theme.colors.brand.primary }}>
-                {requirement.category}
-              </h3>
-              <ul className="list-disc pl-5 text-brand-muted">
-                {requirement.requirements.map((req, idx) => (
-                  <li key={idx} className="mb-2">{req}</li>
-                ))}
-              </ul>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Partnership Form */}
-      <div className="mb-12">
-        <Card className="p-6">
-          <h2 className="text-2xl font-bold mb-6" style={{ color: theme.colors.brand.primary }}>
-            Supply Partnership Inquiry
+        
+        {/* Supplier Requirements */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: theme.colors.brand.primary }}>
+            Our Supplier Selection Criteria
           </h2>
-          <p className="text-brand-text mb-6">
-            While we don't have an open marketplace for sellers, we're always looking for exceptional suppliers who can provide high-quality 
-            products that meet our standards. If you're a manufacturer or distributor interested in a wholesale supply partnership, please 
-            share your details below.
-          </p>
-          
-          {submitted ? (
-            <div className="text-center py-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-                <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: theme.colors.brand.text }}>Thank You For Your Interest!</h3>
-              <p className="text-brand-muted mb-4">
-                We've received your supply partnership inquiry. Our procurement team reviews all inquiries based on our current needs and 
-                expansion plans. If there's a potential fit, we'll contact you within 14 business days.
-              </p>
-              <Button
-                variant="solid"
-                onClick={() => setSubmitted(false)}
-                style={{ backgroundColor: theme.colors.brand.primary, color: theme.colors.brand.textLight }}
-              >
-                Submit Another Inquiry
-              </Button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <FormControl isRequired isInvalid={!!errors.companyName}>
-                  <FormLabel>Company Name</FormLabel>
-                  <Input
-                    name="companyName"
-                    placeholder="Enter your company name"
-                    value={formData.companyName}
-                    onChange={handleInputChange}
-                    error={errors.companyName}
-                  />
-                  {errors.companyName && <FormErrorMessage>{errors.companyName}</FormErrorMessage>}
-                </FormControl>
-                
-                <FormControl isRequired isInvalid={!!errors.contactName}>
-                  <FormLabel>Contact Person</FormLabel>
-                  <Input
-                    name="contactName"
-                    placeholder="Enter contact person's name"
-                    value={formData.contactName}
-                    onChange={handleInputChange}
-                    error={errors.contactName}
-                  />
-                  {errors.contactName && <FormErrorMessage>{errors.contactName}</FormErrorMessage>}
-                </FormControl>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <FormControl isRequired isInvalid={!!errors.email}>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your business email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    error={errors.email}
-                  />
-                  {errors.email && <FormErrorMessage>{errors.email}</FormErrorMessage>}
-                </FormControl>
-                
-                <FormControl isRequired isInvalid={!!errors.phone}>
-                  <FormLabel>Phone Number</FormLabel>
-                  <Input
-                    name="phone"
-                    placeholder="Enter your phone number"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    error={errors.phone}
-                  />
-                  {errors.phone && <FormErrorMessage>{errors.phone}</FormErrorMessage>}
-                </FormControl>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <FormControl>
-                  <FormLabel>Website</FormLabel>
-                  <Input
-                    name="website"
-                    placeholder="Enter your company website"
-                    value={formData.website}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-                
-                <FormControl isRequired isInvalid={!!errors.category}>
-                  <FormLabel>Product Category</FormLabel>
-                  <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
-                    className={`w-full px-3 py-2 border ${errors.category ? 'border-brand-error' : 'border-brand-border'} rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary`}
-                  >
-                    <option value="">Select product category</option>
-                    {categoryOptions.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.category && <FormErrorMessage>{errors.category}</FormErrorMessage>}
-                </FormControl>
-              </div>
-              
-              <FormControl isRequired isInvalid={!!errors.productDetails} className="mb-6">
-                <FormLabel>Product Details</FormLabel>
-                <textarea
-                  name="productDetails"
-                  placeholder="Describe your products, pricing structure, production capacity, etc."
-                  value={formData.productDetails}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className={`w-full px-3 py-2 border ${errors.productDetails ? 'border-brand-error' : 'border-brand-border'} rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary`}
-                ></textarea>
-                {errors.productDetails && <FormErrorMessage>{errors.productDetails}</FormErrorMessage>}
-              </FormControl>
-              
-              <FormControl className="mb-6">
-                <FormLabel>Additional Information</FormLabel>
-                <textarea
-                  name="message"
-                  placeholder="Any other information that might be relevant to your inquiry"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full px-3 py-2 border border-brand-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                ></textarea>
-              </FormControl>
-              
-              <div className="flex justify-end">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {supplierRequirements.map((requirement, index) => (
+              <Card key={index} className="p-6">
+                <h3 className="text-lg font-semibold mb-3" style={{ color: theme.colors.brand.primary }}>
+                  {requirement.category}
+                </h3>
+                <ul className="list-disc pl-5 text-brand-muted">
+                  {requirement.requirements.map((req, idx) => (
+                    <li key={idx} className="mb-2">{req}</li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Partnership Form */}
+        <div className="mb-12">
+          <Card className="p-6">
+            <h2 className="text-2xl font-bold mb-6" style={{ color: theme.colors.brand.primary }}>
+              Supply Partnership Inquiry
+            </h2>
+            <p className="text-brand-text mb-6">
+              While we don't have an open marketplace for sellers, we're always looking for exceptional suppliers who can provide high-quality 
+              products that meet our standards. If you're a manufacturer or distributor interested in a wholesale supply partnership, please 
+              share your details below.
+            </p>
+            
+            {submitted ? (
+              <div className="text-center py-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
+                  <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: theme.colors.brand.text }}>Thank You For Your Interest!</h3>
+                <p className="text-brand-muted mb-4">
+                  We've received your supply partnership inquiry. Our procurement team reviews all inquiries based on our current needs and 
+                  expansion plans. If there's a potential fit, we'll contact you within 14 business days.
+                </p>
                 <Button
-                  type="submit"
                   variant="solid"
-                  isLoading={isSubmitting}
+                  onClick={() => setSubmitted(false)}
                   style={{ backgroundColor: theme.colors.brand.primary, color: theme.colors.brand.textLight }}
                 >
-                  Submit Supply Inquiry
+                  Submit Another Inquiry
                 </Button>
               </div>
-            </form>
-          )}
-        </Card>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <FormControl isRequired isInvalid={!!errors.companyName}>
+                    <FormLabel>Company Name</FormLabel>
+                    <Input
+                      name="companyName"
+                      placeholder="Enter your company name"
+                      value={formData.companyName}
+                      onChange={handleInputChange}
+                      error={errors.companyName}
+                    />
+                    {errors.companyName && <FormErrorMessage>{errors.companyName}</FormErrorMessage>}
+                  </FormControl>
+                  
+                  <FormControl isRequired isInvalid={!!errors.contactName}>
+                    <FormLabel>Contact Person</FormLabel>
+                    <Input
+                      name="contactName"
+                      placeholder="Enter contact person's name"
+                      value={formData.contactName}
+                      onChange={handleInputChange}
+                      error={errors.contactName}
+                    />
+                    {errors.contactName && <FormErrorMessage>{errors.contactName}</FormErrorMessage>}
+                  </FormControl>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <FormControl isRequired isInvalid={!!errors.email}>
+                    <FormLabel>Email</FormLabel>
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Enter your business email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      error={errors.email}
+                    />
+                    {errors.email && <FormErrorMessage>{errors.email}</FormErrorMessage>}
+                  </FormControl>
+                  
+                  <FormControl isRequired isInvalid={!!errors.phone}>
+                    <FormLabel>Phone Number</FormLabel>
+                    <Input
+                      name="phone"
+                      placeholder="Enter your phone number"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      error={errors.phone}
+                    />
+                    {errors.phone && <FormErrorMessage>{errors.phone}</FormErrorMessage>}
+                  </FormControl>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <FormControl>
+                    <FormLabel>Website</FormLabel>
+                    <Input
+                      name="website"
+                      placeholder="Enter your company website"
+                      value={formData.website}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
+                  
+                  <FormControl isRequired isInvalid={!!errors.category}>
+                    <FormLabel>Product Category</FormLabel>
+                    <select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleInputChange}
+                      className={`w-full px-3 py-2 border ${errors.category ? 'border-brand-error' : 'border-brand-border'} rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary`}
+                    >
+                      <option value="">Select product category</option>
+                      {categoryOptions.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.category && <FormErrorMessage>{errors.category}</FormErrorMessage>}
+                  </FormControl>
+                </div>
+                
+                <FormControl isRequired isInvalid={!!errors.productDetails} className="mb-6">
+                  <FormLabel>Product Details</FormLabel>
+                  <textarea
+                    name="productDetails"
+                    placeholder="Describe your products, pricing structure, production capacity, etc."
+                    value={formData.productDetails}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className={`w-full px-3 py-2 border ${errors.productDetails ? 'border-brand-error' : 'border-brand-border'} rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary`}
+                  ></textarea>
+                  {errors.productDetails && <FormErrorMessage>{errors.productDetails}</FormErrorMessage>}
+                </FormControl>
+                
+                <FormControl className="mb-6">
+                  <FormLabel>Additional Information</FormLabel>
+                  <textarea
+                    name="message"
+                    placeholder="Any other information that might be relevant to your inquiry"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-brand-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                  ></textarea>
+                </FormControl>
+                
+                <div className="flex justify-end">
+                  <Button
+                    type="submit"
+                    variant="solid"
+                    isLoading={isSubmitting}
+                    style={{ backgroundColor: theme.colors.brand.primary, color: theme.colors.brand.textLight }}
+                  >
+                    Submit Supply Inquiry
+                  </Button>
+                </div>
+              </form>
+            )}
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

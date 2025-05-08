@@ -5,7 +5,7 @@ import ProductCard from '../../components/ui/ProductCard';
 import companyInformation from '../../constants/companyInfo';
 import { useProducts } from '../../hooks/useProducts';
 import { useCategories } from '../../hooks/useCategories';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/seo/SEOHead';
 
 const CategoryPage: React.FC = () => {
   // Rest of the component remains the same
@@ -69,10 +69,10 @@ const CategoryPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{`${category.name} - ${companyInformation.name}`}</title>
-        <meta name="description" content={`Shop our selection of ${category.name.toLowerCase()} products with fast delivery. Browse ${category.itemCount}+ items.`} />
-      </Helmet>
+      <SEOHead 
+        title={category.name}
+        description={`Shop our selection of ${category.name.toLowerCase()} products with 10-minute delivery. Browse ${category.itemCount}+ items.`}
+      />
       
       <div className="container mx-auto px-4 py-8">
         <PageHeader 

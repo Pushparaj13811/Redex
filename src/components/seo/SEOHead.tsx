@@ -146,13 +146,13 @@ const SEOHead: React.FC<SEOProps> = ({
       
       {/* Mobile */}
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="theme-color" content="#b71c1c" />
+      <meta name="theme-color" content="#DC143C" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       
-      {/* Icons */}
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" href="/logo192.png" />
+      {/* Favicon - Fixed to use only existing files */}
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       
       {/* Structured Data */}
       <script type="application/ld+json">

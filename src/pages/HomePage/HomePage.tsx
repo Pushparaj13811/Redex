@@ -5,6 +5,7 @@ import type { ProductProps } from '../../types/product';
 import CategoryCard from '../../components/ui/CategoryCard';
 import ProductCard from '../../components/ui/ProductCard';
 import { useCategories } from '../../hooks/useCategories';
+import SEOHead from '../../components/seo/SEOHead';
 
 const HomePage: React.FC = () => {
   const { getFeaturedProducts } = useProducts();
@@ -13,6 +14,13 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
+      {/* SEO Head with consistent favicon */}
+      <SEOHead 
+        title="Home"
+        description="Order groceries and essentials with 10-minute delivery across Nepal. In-house fulfillment for speed and reliability."
+        keywords="10 minute delivery, grocery delivery, quick commerce, redex, nepal grocery"
+      />
+      
       {/* Hero banner */}
       <div className="mb-8 rounded-lg overflow-hidden relative">
         <img 
@@ -24,10 +32,10 @@ const HomePage: React.FC = () => {
           <div className="px-8 max-w-lg">
             <div className="bg-brand-primary text-brand-textLight text-xs font-bold px-3 py-1 rounded-full w-fit mb-4">SUPER SAVER</div>
             <h1 className="text-3xl font-bold text-brand-textLight mb-2">Freshness in 10 minutes.</h1>
-            <h2 className="text-xl font-bold text-brand-textLight mb-4">Premium groceries, fast delivery</h2>
+            <h2 className="text-xl font-bold text-brand-textLight mb-4">Premium groceries, lightning-fast delivery</h2>
             <div className="flex flex-col gap-2 max-w-xs">
-              <div className="bg-brand-surface rounded-md py-2 px-4 font-semibold text-brand-text">No Delivery Fee</div>
-              <div className="bg-brand-surface rounded-md py-2 px-4 font-semibold text-brand-text">No Surge Fee</div>
+              <div className="bg-brand-surface rounded-md py-2 px-4 font-semibold text-brand-text">In-house Fulfillment</div>
+              <div className="bg-brand-surface rounded-md py-2 px-4 font-semibold text-brand-text">10-Minute Delivery</div>
             </div>
           </div>
         </div>
@@ -107,7 +115,7 @@ const HomePage: React.FC = () => {
           <div>
             <h3 className="font-medium text-brand-text inline-block mr-2">Categories:</h3>
             <div className="inline">
-              {['Grocery', 'Curd', 'Hukka flavour', 'Paan shop near me', 'Eggs price', 'Cheese slice', 'Fresh fruits', 'Fresh vegetables', 'Refined oil', 'Butter price'].map((item, index) => (
+              {['Grocery', 'Curd', 'Fresh fruits', 'Fresh vegetables', 'Eggs', 'Cheese', 'Bread', 'Milk', 'Refined oil', 'Butter'].map((item, index) => (
                 <React.Fragment key={index}>
                   <Link to={`/search?q=${item}`} className="text-brand-muted hover:text-brand-primary">{item}</Link>
                   {index < 9 && <span className="text-brand-muted mx-1">|</span>}

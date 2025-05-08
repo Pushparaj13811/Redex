@@ -3,15 +3,15 @@ import { PageHeader, Card } from '../../components/ui';
 import companyInformation from '../../constants/companyInfo';
 import theme from '../../config/theme';
 import { MISSION_STATEMENT, COMPANY_VALUES, PRINCIPLES, COMMITMENTS } from '../../constants/companyValues';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/seo/SEOHead';
 
 const ValuesPage: React.FC = () => {
   return (
     <>
-      <Helmet>
-        <title>{companyInformation.name} - Values & Mission</title>
-        <meta name="description" content="Discover the values, mission, and principles that drive Redex as we revolutionize quick commerce with 10-minute delivery." />
-      </Helmet>
+      <SEOHead 
+        title="Values & Mission"
+        description="Discover the values, mission, and principles that drive Redex as we revolutionize quick commerce with 10-minute grocery delivery."
+      />
       
       <div className="container mx-auto px-4 py-8">
         <PageHeader 
