@@ -1,5 +1,5 @@
 const companyInformation = {
-    name: "Redex",
+    name: "RedEx",
     address: "Redex Pvt. Ltd., 3rd Floor, Naxal Plaza, Kathmandu, Nepal",
     phone: "+977-9804301484",
     email: "support@redex.com.np",

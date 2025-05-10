@@ -34,6 +34,12 @@ const PressPage = lazy(() => import('../pages/PressPage'));
 const CategoryPage = lazy(() => import('../pages/CategoryPage'));
 const ExampleAnimatedPage = lazy(() => import('../pages/ExampleAnimatedPage'));
 
+// New user account pages
+const DashboardPage = lazy(() => import('../pages/DashboardPage'));
+const CheckoutPage = lazy(() => import('../pages/CheckoutPage')); 
+const ProfilePage = lazy(() => import('../pages/ProfilePage'));
+const CheckoutSuccessPage = lazy(() => import('../pages/CheckoutPage').then(module => ({ default: module.CheckoutSuccessPage })));
+
 // Default placeholders for pages not yet created
 const PlaceholderPage = () => (
   <PageTransitionWrapper>
@@ -43,9 +49,6 @@ const PlaceholderPage = () => (
     </div>
   </PageTransitionWrapper>
 );
-
-// Use placeholder for pages that aren't created yet
-const DashboardPage = lazy(() => Promise.resolve({ default: PlaceholderPage }));
 
 // Component-specific loading skeletons
 const MainLayoutSkeleton = () => (
@@ -315,9 +318,41 @@ const createRouter = () => {
           ),
         },
         {
-          path: '*',
+          path: 'dashboard',
           element: (
             <Suspense fallback={<PageSkeleton type="default" />}>
+              {withPageTransition(DashboardPage)()}
+            </Suspense>
+          ),
+        },
+        {
+          path: 'checkout',
+          element: (
+            <Suspense fallback={<PageSkeleton type="default" />}>
+              {withPageTransition(CheckoutPage)()}
+            </Suspense>
+          ),
+        },
+        {
+          path: 'checkout/success',
+          element: (
+            <Suspense fallback={<PageSkeleton type="default" />}>
+              {withPageTransition(CheckoutSuccessPage)()}
+            </Suspense>
+          ),
+        },
+        {
+          path: 'profile',
+          element: (
+            <Suspense fallback={<PageSkeleton type="default" />}>
+              {withPageTransition(ProfilePage)()}
+            </Suspense>
+          ),
+        },
+        {
+          path: '*',
+          element: (
+            <Suspense fallback={<PageSkeleton />}>
               {withPageTransition(NotFoundPage)()}
             </Suspense>
           ),
