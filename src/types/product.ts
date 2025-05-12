@@ -57,3 +57,18 @@ export interface RelatedProduct {
   id: string;
   similarity: number; // How similar this product is to the main product (0-1)
 } 
+
+export interface ProductProps {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  category: string;
+  description?: string;
+  inStock: boolean;
+  deliveryTime: string;
+  rating?: number;
+  discountPercentage?: number;
+  quantity?: string; // e.g. "500 ml", "200 g", etc.
+}

@@ -6,6 +6,7 @@ import CategoryCard from '../../components/ui/CategoryCard';
 import ProductCard from '../../components/ui/ProductCard';
 import { useCategories } from '../../hooks/useCategories';
 import SEOHead from '../../components/seo/SEOHead';
+import HeroBanner from '../../components/shared/heroBanner';
 
 const HomePage: React.FC = () => {
   const { getFeaturedProducts } = useProducts();
@@ -15,31 +16,14 @@ const HomePage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       {/* SEO Head with consistent favicon */}
-      <SEOHead 
+      <SEOHead
         title="Home"
         description="Order groceries and essentials with 10-minute delivery across Nepal. In-house fulfillment for speed and reliability."
         keywords="10 minute delivery, grocery delivery, quick commerce, redex, nepal grocery"
       />
-      
+
       {/* Hero banner */}
-      <div className="mb-8 rounded-lg overflow-hidden relative">
-        <img 
-          src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&q=75&fit=crop&w=1400&h=400"
-          alt="Shop fresh groceries"
-          className="w-full h-64 object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/70 to-transparent flex items-center">
-          <div className="px-8 max-w-lg">
-            <div className="bg-brand-primary text-brand-textLight text-xs font-bold px-3 py-1 rounded-full w-fit mb-4">SUPER SAVER</div>
-            <h1 className="text-3xl font-bold text-brand-textLight mb-2">Freshness in 10 minutes.</h1>
-            <h2 className="text-xl font-bold text-brand-textLight mb-4">Premium groceries, lightning-fast delivery</h2>
-            <div className="flex flex-col gap-2 max-w-xs">
-              <div className="bg-brand-surface rounded-md py-2 px-4 font-semibold text-brand-text">In-house Fulfillment</div>
-              <div className="bg-brand-surface rounded-md py-2 px-4 font-semibold text-brand-text">10-Minute Delivery</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeroBanner />
 
       {/* Categories */}
       <div className="mb-12">
@@ -55,7 +39,7 @@ const HomePage: React.FC = () => {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-brand-text">Fruits & Vegetables</h2>
           <Link to="/shop" className="text-brand-primary text-sm font-medium flex items-center">
-            See All 
+            See All
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -67,13 +51,13 @@ const HomePage: React.FC = () => {
           ))}
         </div>
       </div>
-      
+
       {/* Popular Grocery Items */}
       <div className="mb-12">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-brand-text">Daily Essentials</h2>
           <Link to="/shop" className="text-brand-primary text-sm font-medium flex items-center">
-            See All 
+            See All
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -81,7 +65,7 @@ const HomePage: React.FC = () => {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {featuredProducts.slice(3, 9).map((product: ProductProps) => (
-            <ProductCard key={product.id} product={{...product, category: 'Daily Essentials'}} />
+            <ProductCard key={product.id} product={{ ...product, category: 'Daily Essentials' }} />
           ))}
         </div>
       </div>
