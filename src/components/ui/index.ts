@@ -47,4 +47,14 @@ export {
   PageHeaderSkeleton,
   GridSkeleton
 } from './Skeleton';
-export { default as PageSkeleton } from './PageSkeleton'; 
+export { default as PageSkeleton } from './PageSkeleton';
+
+// New component exports
+export { default as Avatar } from './Avatar';
+export type { AvatarProps } from './Avatar';
+
+export { default as AvatarGroup } from './AvatarGroup';
+export type { AvatarGroupProps } from './AvatarGroup';
+
+export { default as Image } from './Image';
+export type { ImageProps } from './Image'; 

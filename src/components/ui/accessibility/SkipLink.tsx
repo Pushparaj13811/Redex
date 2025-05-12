@@ -1,17 +1,11 @@
 import React from 'react';
 
 interface SkipLinkProps {
-  /**
-   * The ID of the main content to skip to
-   */
+  /** The ID of the element to skip to */
   targetId?: string;
-  /**
-   * Optional custom text for the skip link
-   */
+  /** Text for the link */
   text?: string;
-  /**
-   * Optional additional class names
-   */
+  /** Additional CSS class names */
   className?: string;
 }
 

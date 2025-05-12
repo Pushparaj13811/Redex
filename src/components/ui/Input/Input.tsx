@@ -62,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     const renderLeftAddon = () => {
       if (!leftAddon) return null;
       return (
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3" aria-hidden="true">
           {typeof leftAddon === 'string' ? (
             <span className="text-gray-500">{leftAddon}</span>
           ) : (
@@ -75,7 +75,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     const renderRightAddon = () => {
       if (!rightAddon) return null;
       return (
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-3" aria-hidden="true">
           {typeof rightAddon === 'string' ? (
             <span className="text-gray-500">{rightAddon}</span>
           ) : (
@@ -99,6 +99,8 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
         hint ? hintId : null,
       ].filter(Boolean).join(' ') || undefined,
       'aria-required': isRequired,
+      'aria-disabled': isDisabled,
+      'aria-readonly': isReadOnly
     };
     
     return (
@@ -109,7 +111,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
             className={`mb-1 text-sm font-medium ${error ? 'text-brand-error' : 'text-brand-text'}`}
           >
             {label}
-            {isRequired && <span className="ml-1 text-brand-error">*</span>}
+            {isRequired && <span className="ml-1 text-brand-error" aria-hidden="true">*</span>}
           </label>
         )}
         
@@ -130,6 +132,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
             readOnly={isReadOnly}
             onChange={onChange}
             data-testid={testId}
+            required={isRequired}
             {...ariaAttributes}
             {...props}
           />
@@ -139,7 +142,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
         {(error || hint) && (
           <div className="mt-1">
             {error && (
-              <p id={errorId} className="text-xs text-brand-error">{error}</p>
+              <p id={errorId} className="text-xs text-brand-error" role="alert">{error}</p>
             )}
             {!error && hint && (
               <p id={hintId} className="text-xs text-brand-muted">{hint}</p>
