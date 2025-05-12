@@ -28,21 +28,29 @@ export interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   subtitle,
-  breadcrumbs,
+  breadcrumbs = [],
   className = '',
   actionButton,
 }) => {
+  // Check if the first breadcrumb is already "Home"
+  const hasHomeLink = breadcrumbs.length > 0 && breadcrumbs[0].label === 'Home';
+
   return (
     <div className={`mb-8 ${className}`}>
       {/* Breadcrumbs */}
-      {breadcrumbs && breadcrumbs.length > 0 && (
-        <nav className="flex items-center text-sm mb-4">
-          <Link to="/" className="text-brand-muted hover:text-brand-primary">
-            Home
-          </Link>
+      {breadcrumbs.length > 0 && (
+        <nav className="flex items-center text-sm mb-4" aria-label="Breadcrumb">
+          {!hasHomeLink && (
+            <>
+              <Link to="/" className="text-brand-muted hover:text-brand-primary">
+                Home
+              </Link>
+              <span className="mx-2 text-brand-muted">›</span>
+            </>
+          )}
           {breadcrumbs.map((crumb, index) => (
             <React.Fragment key={index}>
-              <span className="mx-2 text-brand-muted">›</span>
+              {index > 0 && <span className="mx-2 text-brand-muted">›</span>}
               {index === breadcrumbs.length - 1 || !crumb.href ? (
                 <span className="text-brand-text">{crumb.label}</span>
               ) : (
