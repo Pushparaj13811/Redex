@@ -5,6 +5,7 @@ import { PageTransitionWrapper, PageSkeleton } from '../components/ui';
 
 // Layouts
 const MainLayout = lazy(() => import('../components/layouts/MainLayout'));
+const DashboardLayout = lazy(() => import('../components/layouts/DashboardLayout'));
 
 // Pages
 const HomePage = lazy(() => import('../pages/HomePage'));
@@ -36,8 +37,9 @@ const ExampleAnimatedPage = lazy(() => import('../pages/ExampleAnimatedPage'));
 
 // New user account pages
 const DashboardPage = lazy(() => import('../pages/DashboardPage'));
-const CheckoutPage = lazy(() => import('../pages/CheckoutPage')); 
 const ProfilePage = lazy(() => import('../pages/ProfilePage'));
+const SettingsPage = lazy(() => import('../pages/SettingsPage'));
+const CheckoutPage = lazy(() => import('../pages/CheckoutPage')); 
 const CheckoutSuccessPage = lazy(() => import('../pages/CheckoutPage').then(module => ({ default: module.CheckoutSuccessPage })));
 
 // Default placeholders for pages not yet created
@@ -125,6 +127,7 @@ const withPageTransition = (Component: React.ComponentType) => {
 // Create router with routes
 const createRouter = () => {
   return createBrowserRouter([
+    // Main application routes with MainLayout (includes Navbar and Footer)
     {
       path: '/',
       element: (
@@ -318,14 +321,6 @@ const createRouter = () => {
           ),
         },
         {
-          path: 'dashboard',
-          element: (
-            <Suspense fallback={<PageSkeleton type="default" />}>
-              {withPageTransition(DashboardPage)()}
-            </Suspense>
-          ),
-        },
-        {
           path: 'checkout',
           element: (
             <Suspense fallback={<PageSkeleton type="default" />}>
@@ -342,14 +337,6 @@ const createRouter = () => {
           ),
         },
         {
-          path: 'profile',
-          element: (
-            <Suspense fallback={<PageSkeleton type="default" />}>
-              {withPageTransition(ProfilePage)()}
-            </Suspense>
-          ),
-        },
-        {
           path: '*',
           element: (
             <Suspense fallback={<PageSkeleton />}>
@@ -357,33 +344,62 @@ const createRouter = () => {
             </Suspense>
           ),
         },
-        // Protected routes
+      ],
+    },
+    
+    // Dashboard routes with DashboardLayout (separate from MainLayout)
+    {
+      path: '/dashboard',
+      element: <ProtectedRoute />,
+      children: [
         {
-          element: <ProtectedRoute />,
+          element: (
+            <Suspense fallback={<PageSkeleton type="default" />}>
+              <DashboardLayout />
+            </Suspense>
+          ),
           children: [
             {
-              path: 'dashboard',
+              index: true,
               element: (
                 <Suspense fallback={<PageSkeleton type="default" />}>
                   {withPageTransition(DashboardPage)()}
                 </Suspense>
               ),
             },
-          ],
-        },
-        // Admin routes
-        {
-          element: <AdminRoute />,
-          children: [
             {
-              path: 'admin',
+              path: 'profile',
               element: (
                 <Suspense fallback={<PageSkeleton type="default" />}>
-                  {withPageTransition(PlaceholderPage)()}
+                  {withPageTransition(ProfilePage)()}
+                </Suspense>
+              ),
+            },
+            {
+              path: 'settings',
+              element: (
+                <Suspense fallback={<PageSkeleton type="default" />}>
+                  {withPageTransition(SettingsPage)()}
                 </Suspense>
               ),
             },
           ],
+        },
+      ],
+    },
+    
+    // Admin routes
+    {
+      path: '/admin',
+      element: <AdminRoute />,
+      children: [
+        {
+          index: true,
+          element: (
+            <Suspense fallback={<PageSkeleton type="default" />}>
+              {withPageTransition(PlaceholderPage)()}
+            </Suspense>
+          ),
         },
       ],
     },

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useReduxHooks';
 import { selectTotalItems } from '../../store/cartSlice';
 import Button from '../ui/Button/Button';
@@ -14,14 +14,17 @@ interface Route {
 }
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const locationRef = useRef<HTMLDivElement>(null);
   const locationMenuRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
   const totalItems = useAppSelector(selectTotalItems);
   const navRoutes = getNavRoutes();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   // Handle scroll for navbar styling
@@ -47,11 +50,20 @@ const Navbar = () => {
       ) {
         setIsLocationOpen(false);
       }
+      
+      // Close user dropdown when clicked outside
+      if (
+        isUserDropdownOpen &&
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsUserDropdownOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isLocationOpen]);
+  }, [isLocationOpen, isUserDropdownOpen]);
 
   // Toggle mobile menu
   const toggleMenu = () => {
@@ -61,6 +73,11 @@ const Navbar = () => {
   // Toggle location selector
   const toggleLocation = () => {
     setIsLocationOpen(!isLocationOpen);
+  };
+
+  // Toggle user dropdown
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
   };
 
   // Open login modal
@@ -77,18 +94,24 @@ const Navbar = () => {
     setIsLoginModalOpen(false);
   };
 
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    setIsUserDropdownOpen(false);
+    navigate('/');
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header
+      className={`sticky top-0 z-50 bg-brand-primary text-brand-textLight transition-shadow ${
+        isScrolled ? 'shadow-lg' : ''
+      }`}
+    >
       {/* Top gradient bar */}
       <div className="h-1 w-full bg-brand-primary"></div>
       
-      <nav
-        className={`
-          w-full bg-brand-primary transition-all duration-300
-          ${isScrolled ? 'py-2' : 'py-3'}
-        `}
-      >
-        <div className="container mx-auto px-4">
+      <nav className="container mx-auto px-4">
+        <div className="flex flex-col py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0">
@@ -205,23 +228,77 @@ const Navbar = () => {
 
             <div className="flex items-center space-x-3">
               {isAuthenticated ? (
-                <Link to="/dashboard" className="hidden md:flex items-center text-brand-textLight hover:bg-opacity-20 hover:bg-brand-textLight rounded-lg px-3 py-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                <div className="relative" ref={userDropdownRef}>
+                  <button
+                    onClick={toggleUserDropdown}
+                    className="hidden md:flex items-center text-brand-textLight hover:bg-opacity-20 hover:bg-brand-textLight rounded-lg px-3 py-2"
+                    aria-expanded={isUserDropdownOpen}
+                    aria-haspopup="true"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                  <span className="font-medium">{user?.name?.split(' ')[0] || 'Account'}</span>
-                </Link>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    <span className="font-medium">{user?.name?.split(' ')[0] || 'Account'}</span>
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className={`h-4 w-4 ml-1 transition-transform ${isUserDropdownOpen ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  
+                  {/* User Dropdown Menu */}
+                  {isUserDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                      <div className="px-4 py-3 border-b border-brand-border">
+                        <p className="text-sm font-medium text-brand-text">{user?.name}</p>
+                        <p className="text-xs text-brand-muted truncate">{user?.email}</p>
+                      </div>
+                      <Link 
+                        to="/dashboard" 
+                        className="block px-4 py-2 text-sm text-brand-text hover:bg-brand-surface"
+                        onClick={() => setIsUserDropdownOpen(false)}
+                      >
+                        Dashboard
+                      </Link>
+                      <Link 
+                        to="/dashboard/profile" 
+                        className="block px-4 py-2 text-sm text-brand-text hover:bg-brand-surface"
+                        onClick={() => setIsUserDropdownOpen(false)}
+                      >
+                        Profile
+                      </Link>
+                      <Link 
+                        to="/dashboard/settings" 
+                        className="block px-4 py-2 text-sm text-brand-text hover:bg-brand-surface"
+                        onClick={() => setIsUserDropdownOpen(false)}
+                      >
+                        Settings
+                      </Link>
+                      <div className="border-t border-brand-border mt-1"></div>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-brand-error hover:bg-brand-surface"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <Button
                   variant="solid"
@@ -394,11 +471,37 @@ const Navbar = () => {
 
                 <div className="px-4 py-3">
                   {isAuthenticated ? (
-                    <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                      <Button variant="solid" colorScheme="primary" size="sm" isFullWidth>
-                        My Account
+                    <div className="space-y-2">
+                      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="solid" colorScheme="primary" size="sm" isFullWidth>
+                          Dashboard
+                        </Button>
+                      </Link>
+                      <div className="flex space-x-2">
+                        <Link to="/dashboard/profile" onClick={() => setIsMenuOpen(false)} className="flex-1">
+                          <Button variant="outline" colorScheme="primary" size="sm" isFullWidth>
+                            Profile
+                          </Button>
+                        </Link>
+                        <Link to="/dashboard/settings" onClick={() => setIsMenuOpen(false)} className="flex-1">
+                          <Button variant="outline" colorScheme="primary" size="sm" isFullWidth>
+                            Settings
+                          </Button>
+                        </Link>
+                      </div>
+                      <Button 
+                        variant="outline" 
+                        colorScheme="error" 
+                        size="sm" 
+                        isFullWidth
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          handleLogout();
+                        }}
+                      >
+                        Logout
                       </Button>
-                    </Link>
+                    </div>
                   ) : (
                     <Button
                       variant="solid"

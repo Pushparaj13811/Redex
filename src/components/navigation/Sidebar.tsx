@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { getNavRoutes } from '../../routes/config';
 import type { RouteItem } from '../../types/routes';
@@ -10,9 +10,10 @@ import companyInformation from '../../constants/companyInfo';
  * Shows navigation links for protected dashboard routes
  */
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(true);
   const [navRoutes, setNavRoutes] = useState<RouteItem[]>([]);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
 
   // Get dashboard routes
@@ -50,6 +51,12 @@ const Sidebar = () => {
       setIsOpen(false);
     }
   }, [location.pathname]);
+
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   // Icons for routes
   const getIconForRoute = (path: string) => {
@@ -133,7 +140,58 @@ const Sidebar = () => {
           
           {/* Navigation links */}
           <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-            {navRoutes.map((route) => (
+            {/* Dashboard Link */}
+            <NavLink
+              to="/dashboard"
+              end
+              className={({ isActive }) => 
+                `flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'bg-brand-primary text-white'
+                    : 'text-brand-text hover:bg-brand-surfaceHover'
+                }`
+              }
+            >
+              <span className="mr-3">{getIconForRoute('/dashboard')}</span>
+              Dashboard
+            </NavLink>
+            
+            {/* Profile Link */}
+            <NavLink
+              to="/dashboard/profile"
+              className={({ isActive }) => 
+                `flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'bg-brand-primary text-white'
+                    : 'text-brand-text hover:bg-brand-surfaceHover'
+                }`
+              }
+            >
+              <span className="mr-3">{getIconForRoute('/dashboard/profile')}</span>
+              Profile
+            </NavLink>
+            
+            {/* Settings Link */}
+            <NavLink
+              to="/dashboard/settings"
+              className={({ isActive }) => 
+                `flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'bg-brand-primary text-white'
+                    : 'text-brand-text hover:bg-brand-surfaceHover'
+                }`
+              }
+            >
+              <span className="mr-3">{getIconForRoute('/dashboard/settings')}</span>
+              Settings
+            </NavLink>
+            
+            {/* Dynamic Routes */}
+            {navRoutes.filter(route => 
+              route.path !== '/dashboard' && 
+              route.path !== '/dashboard/profile' && 
+              route.path !== '/dashboard/settings'
+            ).map((route) => (
               <NavLink
                 key={route.path}
                 to={route.path}
@@ -181,20 +239,33 @@ const Sidebar = () => {
           
           {/* Footer */}
           <div className="p-4 border-t border-brand-border">
-            <button
-              className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-brand-text hover:bg-brand-surfaceHover w-full"
-              onClick={() => {
-                // Toggle the sidebar on mobile (could be connected to app state)
-                if (window.innerWidth < 768) {
-                  setIsOpen(!isOpen);
-                }
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
-              {isOpen ? 'Collapse' : 'Expand'}
-            </button>
+            <div className="flex flex-col space-y-2">
+              <button
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-brand-text hover:bg-brand-surfaceHover w-full"
+                onClick={() => {
+                  // Toggle the sidebar on mobile
+                  if (window.innerWidth < 768) {
+                    setIsOpen(!isOpen);
+                  }
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+                {isOpen ? 'Collapse' : 'Expand'}
+              </button>
+              
+              {/* Logout Button */}
+              <button
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-brand-error hover:bg-brand-error/5 w-full"
+                onClick={handleLogout}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </aside>

@@ -130,13 +130,15 @@ export const appRoutes: RouteItem[] = [
     path: '/dashboard/profile',
     label: 'Profile',
     protected: true,
-    showInNav: false
+    showInNav: true,
+    icon: 'user'
   },
   {
     path: '/dashboard/settings',
     label: 'Settings',
     protected: true,
-    showInNav: false
+    showInNav: true,
+    icon: 'settings'
   },
   {
     path: '*',
